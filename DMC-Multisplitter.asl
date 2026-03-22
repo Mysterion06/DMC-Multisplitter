@@ -1,6 +1,7 @@
 // Credits Mysterion352 DMC1-4 & putting them together, also fixing bugs when switching games + stopping conditions
 // Kuno for providing DMC5 & Reboot
 // Update 14.03.2026 by Mysterion352 - Updated DMC1 Splits added; Timer is now stopping when finishing a run, up until starting a new run; DMC3 splits adjusted to be when the bullets hit, not when finishing the level
+// Update 16.03.2026 by Mysterion352 - Fallback to prevent double splits for finishing dmc1 and dmc2, also no split when starting dmc3 anymore. 
 
 state("dmc1")
 {
