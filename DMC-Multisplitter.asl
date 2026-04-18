@@ -2,6 +2,7 @@
 // Kuno for providing DMC5 & Reboot
 // Update 14.03.2026 by Mysterion352 - Updated DMC1 Splits added; Timer is now stopping when finishing a run, up until starting a new run; DMC3 splits adjusted to be when the bullets hit, not when finishing the level
 // Update 16.03.2026 by Mysterion352 - Fallback to prevent double splits for finishing dmc1 and dmc2, also no split when starting dmc3 anymore. 
+// Update 18.04.2026 by Mysterion352 - Changed the final split logic of dmc5 to prevent the timer stopping and added another fallback logic to prevent double splits for dmc1 last mission
 
 state("dmc1")
 {
@@ -332,8 +333,9 @@ split
             {
                 return false;
             }
-            else if(current.missionNumber != old.missionNumber)
+            else if(current.missionNumber != old.missionNumber && vars.DMC1Split <= 21)
             {
+                vars.DMC1Split++;
                 return true;
             }
     
@@ -402,10 +404,10 @@ split
         }
         case "DevilMayCry5":
         {
-            if (current.missionNum == 20 && current.finalBossPtr > 0 && old.finalBossHP > 0)
+            if (current.missionNum == 20 && current.finalBossPtr > 0 && old.finalBossHP > 0 && current.finalBossHP == 0)
             {
                 vars.DMC5Finish = true;
-                return current.finalBossHP == 0;
+                return true;
             }
 
             if (current.missionNum != old.missionNum)
